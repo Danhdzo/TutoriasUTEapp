@@ -1,0 +1,73 @@
+﻿@model TutoriasUTEapp.ViewModels.LoginViewModel
+
+
+@{
+    ViewBag.Background = "/Imagenes/img/bg-masthead-32.jpg";
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+
+<center>
+    <br>
+    <br>
+    <h1 class="display-2 font-weight-bold">TutoríasUTE</h1>
+</center>
+
+<div style="width: 400px; margin: auto">
+    <center>
+        <br>
+        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <fieldset>
+
+
+                <h3>LOGIN</h3>
+                <br />
+                <br />
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                <div align="center">
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.UserName)
+                        @Html.TextBoxFor(a => a.UserName, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.UserName, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <br />
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(a => a.UserPassword)
+                        @Html.PasswordFor(a => a.UserPassword, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(a => a.UserPassword, "", new { @class = "text-danger" })
+                    </div>
+
+
+                    <br />
+
+                    <button type="submit" class="btn btn-defaul btn-success"> Entrar </button>
+
+                </div>
+
+            </fieldset>
+        }
+
+    </center>
+    <br>
+
+</div>
+
+
+
+

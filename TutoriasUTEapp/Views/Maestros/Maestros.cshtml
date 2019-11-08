@@ -1,0 +1,152 @@
+﻿@model TutoriasUTEapp.ViewModels.MaestrosCommonViewModel
+
+
+@{
+    ViewBag.Title = "Docentes";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <br />
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+    <h6 style="color:red">WARNING: no se verifica que el ID de empleado sea único</h6>
+    <h6 style="color:red">WARNING: al borrar no verifica que el docente tenga una materia o grupo</h6>
+    <hr />
+
+</center>
+<br />
+
+
+<div style="width: 500px; margin: auto">
+
+    @using (Html.BeginForm("Maestros", "Maestros", FormMethod.Post))
+    {
+        <fieldset>
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <br />
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.MaestrosCreateVM.EmployeeID)
+                    @Html.TextBoxFor(m => m.MaestrosCreateVM.EmployeeID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MaestrosCreateVM.EmployeeID, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.MaestrosCreateVM.LastNameP)
+                    @Html.TextBoxFor(m => m.MaestrosCreateVM.LastNameP, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MaestrosCreateVM.LastNameP, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.MaestrosCreateVM.LastNameM)
+                    @Html.TextBoxFor(m => m.MaestrosCreateVM.LastNameM, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MaestrosCreateVM.LastNameM, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.MaestrosCreateVM.FirstMidName)
+                    @Html.TextBoxFor(m => m.MaestrosCreateVM.FirstMidName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.MaestrosCreateVM.FirstMidName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.MaestrosCreateVM.UserName)
+                @Html.TextBoxFor(m => m.MaestrosCreateVM.UserName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MaestrosCreateVM.UserName, "", new { @class = "text-danger" })
+            </div>
+
+            <center>
+                <div class="form-group">
+                    <div class="form-check">
+                        @Html.LabelFor(m => m.MaestrosCreateVM.Tutor)
+                        @Html.EditorFor(m => m.MaestrosCreateVM.Tutor, new { @class = "form-control" })
+                    </div>
+                </div>
+                <br />
+                <button type="submit" class="btn btn-success btn-default">Agregar</button>
+            </center>
+
+        </fieldset>
+    }
+
+
+</div>
+
+<br />
+<br />
+<br />
+
+
+<div align="center">
+    <h4>Docentes</h4>
+    <br />
+
+    <div action="" style="width: 600px; margin: auto">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">ID de Empleado</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Usuario</th>
+                    <th scope="col">Tutor</th>
+                    <th scope="col">Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var maestro in Model.MaestrosResultVM.Maestros)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => maestro.EmployeeID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => maestro.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => maestro.UserName)
+                        </td>
+                        <td>
+                            @if (maestro.Tutor == true)
+                            {
+                                <text>  si </text>
+                            }
+                            @if (maestro.Tutor == false)
+                            {
+                                <text>  no </text>
+                            }
+                        </td>
+                        <td><button onclick="location.href='@Html.Raw(Url.Action("EliminarMaestro", "Maestros", new { EmployeeID = maestro.EmployeeID }))'" class="btn btn-danger btn-sm"> Eliminar </button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br>
+    </div>
+
+</div>
+
+

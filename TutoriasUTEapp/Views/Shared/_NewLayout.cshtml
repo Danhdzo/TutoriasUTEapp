@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewBag.Title</title>
+
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="~/Content/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="~/Content/Styles/css/stylish-portfolio.min.css" rel="stylesheet">
+    <link rel="icon" href="~/Imagenes/img/final_logo.png">
+
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100%;
+        }
+    </style>
+</head>
+<body id="page-top" background=@ViewBag.Background style="background-repeat: no-repeat;">
+
+    @RenderBody()
+
+    <center>
+        <br />
+        <br />
+        <br />
+        <br />
+        <p class="text-muted small mb-0">DESARROLLADORES</p>
+        <p class="text-muted small mb-0">Guillermo Guerrero Córdova</p>
+        <p class="text-muted small mb-0">Anahí Ruiz Calderón</p>
+        <p class="text-muted small mb-0">@DateTime.Now.Year</p>
+        <br>
+    </center>
+
+    <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/Scripts/js/stylish-portfolio.min.js"></script>
+</body>
+</html>

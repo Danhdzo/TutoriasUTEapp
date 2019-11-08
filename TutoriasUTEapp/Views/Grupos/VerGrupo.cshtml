@@ -1,0 +1,120 @@
+﻿@model TutoriasUTEapp.ViewModels.GruposVerCommonViewModel
+@{
+    ViewBag.Title = "Ver Grupo";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+
+    <h6 style="color:red">WARNING: al borrar un grupo se eliminan los alumnos</h6>
+    <hr />
+
+</center>
+<br />
+
+
+<div style="width: 500px; margin: auto">
+    <div align="center">
+
+        <h3>@Model.Grupo.GrupoID</h3>
+        <br />
+        <h6><strong>Tutor: </strong>@Model.Grupo.Tutor</h6>
+        <br />
+        <p><strong>Carrera: </strong>@Model.Grupo.Carrera</p>
+        <p><strong>Cuatrimestre: </strong>@Model.Grupo.Cuatrimestre</p>
+        <p><strong>Sección: </strong>@Model.Grupo.Seccion</p>
+        <p><strong>Modalidad: </strong>@Model.Grupo.Modalidad</p>
+        <p><strong>Turno: </strong>@Model.Grupo.Turno</p>
+        <p><strong>Generación: </strong>@Model.Grupo.Generacion</p>
+
+    </div>
+</div>
+<br />
+
+<div class="form-group">
+    <center>
+        <h5 for="inputText5">Asignaturas</h5>
+    </center>
+</div>
+
+<div style="width: 400px; margin: auto">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Asignatura</th>
+                <th scope="col">Docente</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var materia in Model.Materias)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(m => materia.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => materia.Maestro)
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+
+<div class="form-group">
+    <center>
+        <h5 for="inputText5">Alumnos</h5>
+    </center>
+</div>
+
+<div style="width: 400px; margin: auto">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Matricula</th>
+                <th scope="col">Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var alumno in Model.Alumnos)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => alumno.Registration)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => alumno.Name)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<br />
+<br />
+
+<center>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Grupos", "Grupos")'" class="btn btn-xl btn-light mr-4"> Regresar </button></td>
+            <td>    </td>
+            <td><button onclick="location.href='@Url.Action("EliminarGrupo", "Grupos", new { ID = Model.Grupo.ID})'" class="btn btn-danger btn-lg active" aria-pressed="true"> Borrar Grupo </button></td>
+        </tr>
+    </table>
+</center>

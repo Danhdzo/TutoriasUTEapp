@@ -1,0 +1,73 @@
+﻿
+@model List<TutoriasUTEapp.ViewModels.GruposCrearMateriasViewModel>
+
+
+@{
+    ViewBag.Title = "Agregar Materias";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <br />
+    <br />
+
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+
+
+</center>
+<br />
+
+<div style="width: 600px; margin: auto">
+    @using (Html.BeginForm("AgregarMaterias", "Grupos", FormMethod.Post))
+    {
+        <fieldset>
+
+
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @if (@ViewBag.Message != null)
+            {
+                <div style="border: 1px solid red">
+                    @ViewBag.Message
+                </div>
+            }
+
+            <div align="center">
+
+
+                <table class="table table-bordered">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => Model[i].Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => Model[i].Maestro)
+                            </td>
+                            <td>
+                                @Html.EditorFor(m => Model[i].isSelected, null, Model[i].ID)
+                            </td>
+                        </tr>
+
+                        @Html.HiddenFor(m => Model[i].GrupoID, Model[i].GrupoID)
+                        @Html.HiddenFor(m => Model[i].ID, Model[i].ID)
+                    }
+                </table>
+                <br />
+
+                <button type="submit" class="btn btn-success btn-lg js-scroll-trigger"> Finalizar </button>
+
+            </div>
+
+        </fieldset>
+    }
+
+</div>

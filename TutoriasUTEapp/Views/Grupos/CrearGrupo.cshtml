@@ -1,0 +1,155 @@
+﻿@model TutoriasUTEapp.ViewModels.GruposCrearViewModel
+
+
+@{
+    ViewBag.Title = "Crear Grupo";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+
+    <h6 style="color:red">WARNING: no se verifican los campos de ID</h6>
+    <hr />
+
+</center>
+<br />
+
+
+
+<div style="width: 500px; margin: auto">
+    <center>
+        @using (Html.BeginForm("CrearGrupo", "Grupos", FormMethod.Post))
+        {
+            <fieldset>
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                <div align="center">
+
+                    <div class="form-group">
+                        <strong> @Html.LabelFor(g => g.CareerID)</strong>
+                        @Html.ValidationMessageFor(g => g.CareerID, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(g => g.CareerID, new { @class = "form-control" })
+
+                        @foreach (var carrera in Model.Carreras)
+                        {
+                            <p> ID = @carrera.ID - @carrera.Description</p>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <strong> @Html.LabelFor(g => g.Term)</strong>
+                        @Html.TextBoxFor(g => g.Term, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(g => g.Term, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <strong> @Html.LabelFor(g => g.Section)</strong>
+                        @Html.TextBoxFor(g => g.Section, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(g => g.Section, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <strong> @Html.LabelFor(g => g.ModalityID)</strong>
+                            @Html.TextBoxFor(g => g.ModalityID, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(g => g.ModalityID, "", new { @class = "text-danger" })
+                            <table>
+                                @foreach (var modalidad in Model.Modalidades)
+                                {
+                                    <tr>
+                                        <td>
+                                            ID = @modalidad.ID
+                                        </td>
+                                        <td>
+                                            @modalidad.Description
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <strong> @Html.LabelFor(g => g.TurnID)</strong>
+                            @Html.TextBoxFor(g => g.TurnID, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(g => g.TurnID, "", new { @class = "text-danger" })
+                            <table>
+                                @foreach (var turno in Model.Turnos)
+                                {
+                                    <tr>
+                                        <td>
+                                            ID = @turno.ID
+                                        </td>
+                                        <td>
+                                            @turno.Description
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <strong> @Html.LabelFor(g => g.Generation)</strong>
+                            @Html.TextBoxFor(g => g.Generation, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(g => g.Generation, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <strong> @Html.LabelFor(g => g.TutorID)</strong>
+                        @Html.TextBoxFor(g => g.TutorID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(g => g.TutorID, "", new { @class = "text-danger" })
+                        @if (Model.Tutores is null || Model.Tutores.Count() == 0)
+                        {
+                            <text> NO HAY TUTORES </text>
+                        }
+
+                        @foreach (var tutor in Model.Tutores)
+                        {
+                            <p>ID = @tutor.ID - @tutor.Nombre</p>
+
+                        }
+                    </div>
+                    <br />
+
+                    <table>
+                        <tr>
+                            <td>
+                                <button type="submit" class="btn btn-success btn-lg js-scroll-trigger"> Siguiente </button>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                </div>
+
+            </fieldset>
+        }
+
+    </center>
+</div>
+<hr />
+<table>
+    <tr>
+        <td><button onclick="location.href='@Url.Action("Grupos", "Grupos")'" class="btn btn-lg btn-danger mr-4"> Cancelar </button></td>
+    </tr>
+</table>

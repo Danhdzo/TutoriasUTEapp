@@ -1,0 +1,171 @@
+﻿@model TutoriasUTEapp.ViewModels.GruposCrearAlumnosCommonViewModel
+
+@{
+    ViewBag.Title = "Agregar Alumnos";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <br />
+    <br />
+
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+
+    <h6 style="color:red">WARNING: no se verifica que la matrícula sea única</h6>
+    <h6 style="color:red">WARNING: no se verifican los campos de ID</h6>
+    <h5 style="color:red">NO SE PUEDEN BORRAR LOS ALUMNOS</h5>
+    <hr />
+
+</center>
+<br />
+
+
+<div style="width: 500px; margin: auto">
+    <center>
+
+        @using (Html.BeginForm("AgregarAlumnos", "Grupos", FormMethod.Post))
+        {
+            <fieldset>
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                <div align="center">
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.Registration)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.Registration, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.Registration, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.FirstMidName)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.FirstMidName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.FirstMidName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.LastNameP)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.LastNameP, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.LastNameP, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.LastNameM)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.LastNameM, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.LastNameM, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.Telephone)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.Telephone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.Telephone, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.EmergencyTelephone)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.EmergencyTelephone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.EmergencyTelephone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.AcademicEmail)
+                        @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.AcademicEmail, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.AcademicEmail, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.Birthday)
+                        @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.Birthday, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.Birthday, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <center>
+                            @Html.LabelFor(s => s.GruposCrearAlumnosCreateVM.SituationID)
+                            @Html.TextBoxFor(s => s.GruposCrearAlumnosCreateVM.SituationID, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(s => s.GruposCrearAlumnosCreateVM.SituationID, "", new { @class = "text-danger" })
+                            <table>
+                                @foreach (var situacion in Model.GruposCrearAlumnosCreateVM.Situaciones)
+                                {
+                                    <tr>
+                                        <td>
+                                            ID = @situacion.ID
+                                        </td>
+                                        <td>
+                                            @situacion.Description
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </center>
+
+                    </div>
+
+                    @Html.HiddenFor(s => s.GrupoID)
+                    <button type="submit" class="btn btn-success btn-default"> Guardar </button>
+
+                </div>
+
+            </fieldset>
+        }
+
+
+
+
+    </center>
+
+</div>
+<br />
+<br />
+
+
+
+<div action="" style="width: 600px; margin: auto">
+    <div align="center">
+        <h4>Alumnos</h4>
+        <br />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>
+                        Matricula
+                    </td>
+                    <td>
+                        Nombre
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var alumno in Model.GruposCrearAlumnosResultVM.Alumnos)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => alumno.Registration)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => alumno.Name)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+
+<br />
+<center>
+    <button onclick="location.href='@Url.Action("AgregarMaterias", "Grupos", new { ID = Model.GrupoID})'" class="btn btn-success btn-lg js-scroll-trigger"> Siguiente </button>
+    <hr />
+</center>

@@ -1,0 +1,127 @@
+﻿@model TutoriasUTEapp.ViewModels.RecordatoriosCommonViewModel
+
+@{
+    ViewBag.Title = "Recordatorios";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+
+</center>
+<br />
+
+<div action="" style="width: 500px; margin: auto">
+    <center>
+
+        @using (Html.BeginForm("Recordatorios", "Recordatorios", FormMethod.Post))
+        {
+            <fieldset>
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+
+                <div align="center">
+
+                    
+                    <br />
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(r => r.RecordatoriosCreateVM.Fecha)<br />
+                            @Html.EditorFor(r => r.RecordatoriosCreateVM.Fecha, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(r => r.RecordatoriosCreateVM.Fecha, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.LabelFor(r => r.RecordatoriosCreateVM.Asunto)<br />
+                            @Html.TextBoxFor(r => r.RecordatoriosCreateVM.Asunto, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(r => r.RecordatoriosCreateVM.Asunto, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(r => r.RecordatoriosCreateVM.Recordatorio)
+                        @Html.TextAreaFor(r => r.RecordatoriosCreateVM.Recordatorio, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(r => r.RecordatoriosCreateVM.Recordatorio, "", new { @class = "text-danger" })
+                        <br />
+                        @Html.LabelFor(r => r.RecordatoriosCreateVM.Rol)<br />
+                        Tutores @Html.RadioButtonFor(r => r.RecordatoriosCreateVM.Rol, "t") <br />
+                        Docentes @Html.RadioButtonFor(r => r.RecordatoriosCreateVM.Rol, "d")<br />
+
+                    </div>
+                    <br />
+
+
+                    <button type="submit" class="btn btn-success btn-default"> Guardar </button>
+
+                </div>
+
+            </fieldset>
+        }
+
+
+    </center>
+</div>
+<br />
+<br />
+
+<div align="center">
+    <div action="" style="width: 700px; margin: auto">
+        <h4>Recordatorios</h4>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Asunto</th>
+                    <th scope="col">Recordatorio</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var recordatorio in Model.RecordatoriosResultVM.Recordatorios)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => recordatorio.Fecha)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => recordatorio.Asunto)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => recordatorio.Recordatorio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => recordatorio.Rol)
+                        </td>
+                        <td><button onclick="location.href='@Html.Raw(Url.Action("EliminarRecordatorio", "Recordatorios", new { RecordatorioID = recordatorio.RecordatorioID }))'" class="btn btn-danger btn-sm">Eliminar </button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <br>
+    </div>
+</div>

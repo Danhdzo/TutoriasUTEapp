@@ -1,0 +1,60 @@
+﻿@model IEnumerable<TutoriasUTEapp.ViewModels.GruposViewModel>
+
+@{
+    ViewBag.Title = "Grupos";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+    <button onclick="location.href='@Url.Action("CrearGrupo", "Grupos")'" class="btn btn-success btn-lg"> Crear Grupo </button>
+    <hr />
+
+</center>
+<br />
+
+<div action="" style="width: 800px; margin: auto">
+    <div align="center">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Grupo</th>
+                    <th scope="col">Tutor</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var grupo in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(g => grupo.GroupID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(g => grupo.Tutor)
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-lg mr-5" onclick="location.href='@Html.Raw(Url.Action("VerGrupo", "Grupos", new { ID = grupo.ID }))'">Ver</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

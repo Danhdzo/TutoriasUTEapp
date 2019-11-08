@@ -1,0 +1,115 @@
+﻿@model TutoriasUTEapp.ViewModels.MateriasCommonViewModel
+
+@{
+    ViewBag.Title = "Asignaturas";
+    ViewBag.Background = "/Imagenes/img/portfolio-55.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+    <br />
+    <br />
+
+    <h2 class="mb-3">@ViewBag.Title</h2>
+    <hr />
+    <h6 style="color:red">WARNING: no se verifica que el ID de empleado exista</h6>
+    <h6 style="color:red">WARNING: al borrar no verifica que la materia no esté en uso</h6>
+    <hr />
+
+</center>
+<br />
+
+<div style="width: 500px; margin: auto">
+    <center>
+
+        @using (Html.BeginForm("Materias", "Materias", FormMethod.Post))
+        {
+            <fieldset>
+
+
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                @if (@ViewBag.Message != null)
+                {
+                    <div style="border: 1px solid red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+                <div align="center">
+                    
+                    <br />
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MateriasCreateVM.Description)
+                        @Html.TextBoxFor(m => m.MateriasCreateVM.Description, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MateriasCreateVM.Description, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MateriasCreateVM.EmployeeID)
+                        @Html.TextBoxFor(m => m.MateriasCreateVM.EmployeeID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MateriasCreateVM.EmployeeID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MateriasCreateVM.Units)
+                        @Html.TextBoxFor(m => m.MateriasCreateVM.Units, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MateriasCreateVM.Units, "", new { @class = "text-danger" })
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-success btn-default"> Guardar </button>
+
+                </div>
+
+            </fieldset>
+        }
+    </center>
+</div>
+<br />
+<br />
+<br />
+
+
+<div action="" style="width: 600px; margin: auto">
+    <div align="center">
+        <h4>Maestros</h4>
+        <br />
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Asignatura</th>
+                    <th scope="col">Docente</th>
+                    <th scope="col">Unidades</th>
+                    <th scope="col">Estatus</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var materia in Model.MateriasResultVM.Materias)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => materia.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => materia.Teacher)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => materia.Units)
+                        </td>
+                        <td><button onclick="location.href='@Html.Raw(Url.Action("EliminarMateria", "Materias", new { MateriaID = materia.MateriaID }))'" class="btn btn-danger btn-sm"> Eliminar</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

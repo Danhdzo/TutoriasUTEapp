@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "Inicio";
+    ViewBag.Background = "/Imagenes/img/portfolio-56.jpg";
+    Layout = "~/Views/Shared/_NewLayout.cshtml";
+}
+
+<center>
+    <br />
+    <br />
+    <h1 class="mb-1">TutoriasUTE</h1>
+    <h3 class="mb-3">ADMINISTRADOR</h3>
+    <br />
+    <table>
+        <tr>
+            <td><button onclick="location.href='@Url.Action("Inicio", "MainPage")'" class="btn btn-xl btn-light mr-4"> Inicio </button></td>
+            <td><button onclick="location.href='@Url.Action("Salir", "MainPage")'" class="btn btn-success btn-xl js-scroll-trigger"> Salir </button></td>
+        </tr>
+    </table>
+
+</center>
+
+
+
+<section class="content-section" id="portfolio">
+    <div class="container">
+
+        <div class="row no-gutters">
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="@Url.Action("Maestros", "Maestros")">
+                    <span class="caption">
+                        <span class="caption-content">
+                            <h1>Docentes</h1>
+                        </span>
+                    </span>
+                    <img class="img-fluid" src="/Imagenes/img/portfolio-1.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="@Url.Action("Materias", "Materias")">
+                    <span class="caption">
+                        <span class="caption-content">
+                            <h1>Asignaturas</h1>
+                        </span>
+                    </span>
+                    <img class="img-fluid" src="/Imagenes/img/portfolio-2.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="@Url.Action("Grupos", "Grupos")">
+                    <span class="caption">
+                        <span class="caption-content">
+                            <h1>Grupos</h1>
+                        </span>
+                    </span>
+                    <img class="img-fluid" src="/Imagenes/img/portfolio-3.jpg" alt="">
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <a class="portfolio-item" href="@Url.Action("Recordatorios", "Recordatorios")">
+                    <span class="caption">
+                        <span class="caption-content">
+                            <h1>Recordatorios</h1>
+                        </span>
+                    </span>
+                    <img class="img-fluid" src="/Imagenes/img/portfolio-4.jpg" alt="">
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
